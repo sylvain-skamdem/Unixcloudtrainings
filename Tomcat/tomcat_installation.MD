@@ -115,11 +115,11 @@
     Go to the tomcat home directory and Add below users to conf/tomcat-user.xml file
       ```sh
       <role rolename="manager-gui"/>
-      <role rolename="manager-script"/>
+      <!-- <role rolename="manager-script"/>
       <role rolename="manager-jmx"/>
       <role rolename="manager-status"/>
       <user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
-      <user username="deployer" password="deployer" roles="manager-script"/>
+      <user username="deployer" password="deployer" roles="manager-script"/> -->
       <user username="tomcat" password="s3cret" roles="manager-gui"/>
       ```
 1. Restart serivce and try to login to tomcat application from the browser. 
@@ -127,9 +127,8 @@
    This time it should be Successful and you may now use the tomcat user with his password to login.
 
    > [!IMPORTANT]
-   >> Good to know
-
-   >> If for any reasons,you're still denied access with a 403 HTTP code, please clear you cookies from the last hours before attempting to login to tomcat.
+   > Good to know
+   > If for any reasons,you're still denied access with a 403 HTTP code, please clear you cookies from the last hours before attempting to login to tomcat.
 
 1. Now upload your *.war file to the server and deploy it
    Once deployed, a *.war file will be created under your $CATALINA_HOME/webapps folder aong with the unarchived folder name of the same *.war artifact.

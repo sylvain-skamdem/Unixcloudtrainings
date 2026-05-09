@@ -1,20 +1,36 @@
 # WELCOME ON THIS UNIXCLOUDTRAININGS DevOps CI/CD PIPELINE PROJECT
 
-### **Pre-requisites:
+## **Pre-requisites:
+
+> This project will use the [Resume-template-generator](https://github.com/ngostal2019/Resume-template-generator) repository for the deployment of the WAR file.
+
 1. It is *Highly* recommended to pocess a system administration background before attending the project
-2. A solid understanding of Linux OS commands along with the importance of each aws service is nice to have.
-3. You don't have a Linux administration/aws background yet? Please, head over to our website at https://www.unixcloudtrainings.com to see the list of the
- modules we offer.
+1. A solid understanding of Linux OS commands along with the importance of each aws service is nice to have.
+1. You don't have a Linux administration/aws background yet? No worries, we will do the job for you
  
-### Purpose:
-By the end of this project you will be able to understand the benefits of implementing an end-to-end DevOps CI/CD pipeline and to deploy a Java based application onto a Kubernetes cluster over AWS (Amazon Web Services) using tools like:
-- git
-- Terraform
-- Jenkins
+## Purpose:
+
+By the end of this project you will be able to understand the benefits of implementing an end-to-end automated DevOps CI/CD pipeline, and deploy a Java based application onto a Kubernetes cluster over AWS (Amazon Web Services) using tools like:
+
+- Jira
+- Confluence
+- Git
+- GitHub
 - Maven
 - Tomcat
-- Ansible
 - Docker
+- Aqua Trivy
+- Jenkins
+- SonarQube
+- Terraform
+- ArgoCD
+- Ansible
 - Kubernetes
+- JFrog
+- Istio Service Mesh
+- New Relic
+- Grafana
+- Prometheus
+- AWS Cloud
 
-![WhatsApp Image 2021-06-17 at 11 24 25 AM](https://user-images.githubusercontent.com/51853186/122464322-b7ba3a80-cf84-11eb-91a4-16a8628f57e1.jpeg)
+![Our DevOps Roadmap](image.png)
