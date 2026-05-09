@@ -1,10 +1,10 @@
-# Tomcat installation on EC2 instance
+# Tomcat installation on Linux and Amazon EC2 VM instances
 
 ### Pre-requisites
 1. EC2 instance with Java v25.x.y with JAVA_HOME path set.
 
 ### Install Apache Tomcat
-1. Download tomcat packages from  https://tomcat.apache.org/download-11.cgi onto /opt on EC2 instance
+1. Download tomcat packages (preferrably the tar.gz file) from the (Tomcat website)[https://tomcat.apache.org/download-11.cgi] onto /opt on EC2 instance
    ```sh 
    # Create tomcat directory
    cd /opt
@@ -81,6 +81,7 @@ After that restart tomcat services to effect these changes
    sudo systemctl restart tomcat.service
    ```
 1. Update users information in the tomcat-users.xml file
+
 Go to the tomcat home directory and Add below users to conf/tomcat-user.xml file
    ```sh
 	<role rolename="manager-gui"/>
@@ -91,12 +92,14 @@ Go to the tomcat home directory and Add below users to conf/tomcat-user.xml file
 	<user username="deployer" password="deployer" roles="manager-script"/>
 	<user username="tomcat" password="s3cret" roles="manager-gui"/>
    ```
-1. Restart serivce and try to login to tomcat application from the browser. This time it should be Successful and you may now use the tomcat user with his password to log in.
+1. Restart serivce and try to login to tomcat application from the browser. This time it should be Successful and you may now use the tomcat user with his password to login.
+
 Good to know
 > [!IMPORTANT]  
-> If for any reasons,you're still denied access with a 403 HTTP code, please clear you cookies from the last hours before attempting to log in to tomcat.
+> If for any reasons,you're still denied access with a 403 HTTP code, please clear you cookies from the last hours before attempting to login to tomcat.
 
 1. Now upload your *.war file to the server and deploy it
 Once deployed, a *.war file will be created under your $CATALINA_HOME/webapps folder aong with the unarchived folder name of the same *.war artifact.
 
+We just scratched the surface
 Good job for making it so far :rocket:
