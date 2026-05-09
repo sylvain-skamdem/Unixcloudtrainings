@@ -1,57 +1,87 @@
 # Tomcat installation on EC2 instance
 
 ### Pre-requisites
-1. EC2 instance with Java v1.8.x 
+1. EC2 instance with Java v25.x.y with JAVA_HOME path set.
 
 ### Install Apache Tomcat
-1. Download tomcat packages from  https://tomcat.apache.org/download-90.cgi onto /opt on EC2 instance
+1. Download tomcat packages from  https://tomcat.apache.org/download-11.cgi onto /opt on EC2 instance
    ```sh 
    # Create tomcat directory
    cd /opt
-   wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.46/bin/apache-tomcat-9.0.46.tar.gz
-   tar -xvzf /opt/apache-tomcat-9.0.46.tar.gz
+   wget https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.22/bin/apache-tomcat-11.0.22.tar.gz
+   tar -xvzf /opt/apache-tomcat-11.0.22.tar.gz
    ```
-1. give executing permissions to startup.sh and shutdown.sh which are under bin. 
+1. Change ownership and give executing permissions to the /opt/tomcat folder. 
    ```sh
-   chmod +x /opt/apache-tomcat-9.0.46/bin/startup.sh 
-   shutdown.sh
+   # Rename the folder `apache-tomcat-11.0.22` for easier management
+   sudo mv apache-tomcat-11.0.22 tomcat
+   # Create a tomcat local Linux user
+   sudo useradd -r -m -U -d /opt/tomcat -s /bin/false tomcat
+   # Change ownership and permision
+   sudo chown -R tomcat:tomcat /opt/tomcat
+   sudo chmod 755 /opt/tomcat
    ```
 
-1. create link files for tomcat startup.sh and shutdown.sh 
+1. Set Tomcat to run as a system service 
    ```sh
-   ln -s /opt/apache-tomcat-9.0.46/bin/startup.sh /usr/local/bin/tomcatup
-   ln -s /opt/apache-tomcat-9.0.46/bin/shutdown.sh /usr/local/bin/tomcatdown
-   tomcatup
+   sudo nano /etc/systemd/system/tomcat.service
+
+   # Add the below content inside the tomcat.service file
+	[Unit]
+	Description=Apache Tomcat 11 Web Application Container
+	After=network.target
+	
+	[Service]
+	Type=forking
+	
+	User=tomcat
+	Group=tomcat
+	
+	Environment="JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64"   # Update path
+	Environment="CATALINA_PID=/opt/tomcat/temp/tomcat.pid"
+	Environment="CATALINA_HOME=/opt/tomcat"
+	Environment="CATALINA_BASE=/opt/tomcat"
+	Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+	
+	ExecStart=/opt/tomcat/bin/startup.sh
+	ExecStop=/opt/tomcat/bin/shutdown.sh
+	
+	[Install]
+	WantedBy=multi-user.target
+
+   # Save the file content and start the service
+     sudo systemctl daemon-reload
+     sudo systemctl enable tomcat
+     sudo systemctl start tomcat
+     sudo systemctl status tomcat
    ```
   #### Check point :
-access tomcat application from browser on prot 8080  
+Access tomcat application from browser on prot 8080  
  - http://<Public_IP>:8080
 
-  Using unique ports for each application is a best practice in an environment. But tomcat and Jenkins runs on ports number 8080. Hence you should consider changing tomcat port number to another number (8090 for instance) if both are installed on the same system. If that's the case, please change port number in conf/server.xml file under tomcat home
+OPTIONAL when on different machines: Using unique ports for each application is a best practice in an environment. But tomcat and Jenkins runs on ports number 8080. Hence you should consider changing tomcat port number to another number (8090 for instance) if both are installed on the same system. If that's the case, please change port number in conf/server.xml file under tomcat home
    ```sh
- cd /opt/apache-tomcat-9.0.46/conf
+ cd /opt/tomcat/conf
 # update port number in the "connecter port" field in server.xml
 # restart tomcat after configuration update
-tomcatdown
-tomcatup
+sudo systemctl restart tomcat.service
 ```
 #### Check point :
-Access tomcat application from browser on prot 8090  
+Access tomcat application from browser on prot 8090 if port number was changed from 8080
  - http://<Public_IP>:8090
 
-1. now application is accessible on port 8090. but tomcat application doesnt allow to login from browser. changing a default parameter in context.xml does address this issue
+1. Now application is accessible on port 8090/8080. but tomcat application doesn't allow to login from browser when we click on the Manager App button on the right. So, changing the default parameter in context.xml does address this issue
    ```sh
    #search for context.xml
    find / -name context.xml
    ```
-1. above command gives 3 context.xml files. comment (<!-- & -->) `Value ClassName` field on files which are under webapp directory. 
+1. Above command gives a few context.xml files. comment (<!-- & -->) `Valve ClassName` field on files which are under webapp directory. 
 After that restart tomcat services to effect these changes
    ```sh 
-   tomcatdown
-   tomcatup
+   sudo systemctl restart tomcat.service
    ```
 1. Update users information in the tomcat-users.xml file
-goto tomcat home directory and Add below users to conf/tomcat-user.xml file
+Go to the tomcat home directory and Add below users to conf/tomcat-user.xml file
    ```sh
 	<role rolename="manager-gui"/>
 	<role rolename="manager-script"/>
@@ -61,5 +91,12 @@ goto tomcat home directory and Add below users to conf/tomcat-user.xml file
 	<user username="deployer" password="deployer" roles="manager-script"/>
 	<user username="tomcat" password="s3cret" roles="manager-gui"/>
    ```
-1. Restart serivce and try to login to tomcat application from the browser. This time it should be Successful
+1. Restart serivce and try to login to tomcat application from the browser. This time it should be Successful and you may now use the tomcat user with his password to log in.
+Good to know
+> [!IMPORTANT]  
+> If for any reasons,you're still denied access with a 403 HTTP code, please clear you cookies from the last hours before attempting to log in to tomcat.
 
+1. Now upload your *.war file to the server and deploy it
+Once deployed, a *.war file will be created under your $CATALINA_HOME/webapps folder aong with the unarchived folder name of the same *.war artifact.
+
+Good job for making it so far :rocket:
