@@ -4,7 +4,7 @@
 1. EC2 instance with Java v25.x.y with JAVA_HOME path set.
 
 ### Install Apache Tomcat
-1. Download tomcat packages (preferrably the tar.gz file) from the (Tomcat website)[https://tomcat.apache.org/download-11.cgi] onto /opt on EC2 instance
+1. Download tomcat packages (preferrably the tar.gz file) from the (Tomcat website)|[https://tomcat.apache.org/download-11.cgi] onto /opt on EC2 instance
    ```sh 
    # Create tomcat directory
    cd /opt
@@ -19,7 +19,7 @@
    sudo useradd -r -m -U -d /opt/tomcat -s /bin/false tomcat
    # Change ownership and permision
    sudo chown -R tomcat:tomcat /opt/tomcat
-   sudo chmod 755 /opt/tomcat
+   sudo chmod -R 755 /opt/tomcat
    ```
 
 1. Set Tomcat to run as a system service 
@@ -27,27 +27,27 @@
    sudo nano /etc/systemd/system/tomcat.service
 
    # Add the below content inside the tomcat.service file
-	[Unit]
-	Description=Apache Tomcat 11 Web Application Container
-	After=network.target
-	
-	[Service]
-	Type=forking
-	
-	User=tomcat
-	Group=tomcat
-	
-	Environment="JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64"   # Update path
-	Environment="CATALINA_PID=/opt/tomcat/temp/tomcat.pid"
-	Environment="CATALINA_HOME=/opt/tomcat"
-	Environment="CATALINA_BASE=/opt/tomcat"
-	Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
-	
-	ExecStart=/opt/tomcat/bin/startup.sh
-	ExecStop=/opt/tomcat/bin/shutdown.sh
-	
-	[Install]
-	WantedBy=multi-user.target
+[Unit]
+Description=Apache Tomcat 11 Web Application Container
+After=network.target
+
+[Service]
+Type=forking
+
+User=tomcat
+Group=tomcat
+
+Environment="JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64"   # Update path
+Environment="CATALINA_PID=/opt/tomcat/temp/tomcat.pid"
+Environment="CATALINA_HOME=/opt/tomcat"
+Environment="CATALINA_BASE=/opt/tomcat"
+Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+
+ExecStart=/opt/tomcat/bin/startup.sh
+ExecStop=/opt/tomcat/bin/shutdown.sh
+
+[Install]
+WantedBy=multi-user.target
 
    # Save the file content and start the service
      sudo systemctl daemon-reload
