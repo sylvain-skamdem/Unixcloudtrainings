@@ -69,7 +69,7 @@
    User=tomcat
    Group=tomcat
 
-   Environment="JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64"   # Update path
+   Environment="JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64"   # Update path
    Environment="CATALINA_PID=/opt/tomcat/temp/tomcat.pid"
    Environment="CATALINA_HOME=/opt/tomcat"
    Environment="CATALINA_BASE=/opt/tomcat"
@@ -111,7 +111,7 @@
    Tomcat application doesn't allow to login from browser when we click on the `Manager App` button on the right side of welcome page. So, changing the default parameter in context.xml does address this issue
 
    ```sh
-   #search for context.xml
+   # search for context.xml
    find / -name context.xml
    ```
 
@@ -152,7 +152,7 @@
 
 1. Now upload your `*.war` file to the server and deploy it
 
-   Once deployed, a `*.war` file will be created under your `$CATALINA_HOME/webapps` folder aong with the unarchived folder name of the same `*.war` artifact.
+   Once deployed, a `*.war` file will be created under your `$CATALINA_HOME/webapps` folder along with the unarchived folder name of the same `*.war` artifact.
 
    > We just scratched the surface
    >> Good job for making it so far :rocket:
