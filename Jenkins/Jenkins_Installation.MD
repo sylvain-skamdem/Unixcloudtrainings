@@ -29,7 +29,7 @@ Jenkins is a self-contained Java-based program, ready to run out-of-the-box, wit
    PATH=$PATH:$JAVA_HOME/bin
    ```
    
- ### To set it permanently create a *.sh in the /etc/profile.d folde
+   To set it permanently create a *.sh in the /etc/profile.d folde
    ```sh
    sudo vi /etc/profile.d/java_maven.sh
    # If for some reason you don't find the PATH variable in this file on-premise, please add these lines along with the JAVA_HOME variable you're trying to setup.
@@ -79,7 +79,7 @@ Jenkins is a self-contained Java-based program, ready to run out-of-the-box, wit
    ```sh
    http://YOUR-SERVER-PUBLIC-IP:8080
    ```
-  #### Configure Jenkins
+## Configure Jenkins UI
 - The default Username is `admin`
 - Grab the default password 
 - Password Location:`/var/lib/jenkins/secrets/initialAdminPassword`
@@ -90,7 +90,7 @@ Jenkins is a self-contained Java-based program, ready to run out-of-the-box, wit
   - `Manage Jenkins` > `Tools` > `JDK`  
 - Create another admin user id (Optional but recommended)
 
-### Test Jenkins Jobs
+## Test Jenkins Jobs
 1. Create “new item”
 1. Enter an item name – `My-First-Project`
    - Chose `Freestyle` project
