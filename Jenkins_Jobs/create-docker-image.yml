@@ -4,7 +4,7 @@
   become: true
   tasks:
   - name: building docker image
-    command: docker build -t car-brand-choice:v1.0.0 .
+    command: docker build -t resume-generator:v1.0.0 .
     args:
       chdir: /opt/docker
 
@@ -15,6 +15,6 @@
 #    docker_image:
 #      build:
 #        path: /opt/docker
-#      name: car-brand-choice
+#      name: resume-generator
 #     tag: v1.0.0
 #     source: build

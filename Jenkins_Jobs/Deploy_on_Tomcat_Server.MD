@@ -11,12 +11,12 @@
 1. Install 'deploy to container' plugin. This plugin needs to deploy on tomcat server. 
 
   - Install 'deploy to container' plugin without restart  
-    - `Manage Jenkins` > `Jenkins Plugins` > `available` > `deploy to container`
+    - `Manage Jenkins ⚙️` > `Plugins` > `Available plugins` > `deploy to container`
  
 2. Jenkins should need access to the tomcat server to deploy build artifacts. setup credentials to enable this process. use credentials option on Jenkins home page.
 
 - setup credentials
-  - `credentials` > `jenkins` > `Global credentials` > `add credentials`
+  - `credentials` > `jenkins` > `Credentials` > `➕ Add credentials`
     - Username	: `deployer`
     - Password : `deployer`
     - id      :  `deployer`
@@ -28,7 +28,7 @@
      - Copy from: `My_First_Maven_Build`
      
    - *Source Code Management:*
-      - Repository: `https://github.com/ngostal2019/Dev_code.git`
+      - Repository: `https://github.com/ngostal2019/Resume-template-generator.git`
       - Branches to build : `*/main`  
    - *Poll SCM* :      - `* * * *`
 
@@ -38,9 +38,9 @@
 
  - *Post-build Actions*
    - Deploy war/ear to container
-      - WAR/EAR files : `**/*.war`
+      - WAR/EAR files : `target/r*.war`
       - Containers : `Tomcat 9.x`
-         - Credentials: `deployer` (user created on above)
+         - Credentials: `deployer` (user created above)
          - Tomcat URL : `http://<PUBLIC_IP>:8080`
 
 Save and run the job now.

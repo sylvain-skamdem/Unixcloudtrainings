@@ -1,6 +1,6 @@
 ## Integration Kubernetes with Jenkins
 
-# *Jenkins CI Job:* `Deploy_Car-brand-choice_on_K8S`
+# *Jenkins CI Job:* `Deploy_resume-generator_on_K8S`
 
 ### Pre-requisites
 
@@ -8,13 +8,13 @@
 1. Ansible server
 1. Kubernetes cluster
  
-### Steps to create "Deploy_Car-brand-choice_on_K8S" Jenkins job
+### Steps to create "Deploy_resume-generator_on_K8S" Jenkins job
 #### From Jenkins home page select "New Item"
-   - Enter an item name: `Deploy_Car-brand-choice_on_K8S`
+   - Enter an item name: `Deploy_resume-generator_on_K8S`
       - Choose Maven Project
      
    - *Source Code Management:*
-      - Repository: `https://github.com/ngostal2019/Dev_code.git`
+      - Repository: `https://github.com/ngostal2019/Resume-template-generator.git`
       - Branches to build : `*/main`  
    - *Poll SCM* :      - `* * * *`
 
@@ -32,7 +32,7 @@
 	       - Remote directory: `//opt//docker`
 	       - Exec command: 
                 ```sh 
-                ansible-playbook -i /opt/docker/hosts /opt/docker/create-car-brand-choice-image.yml --limit localhost;
+                ansible-playbook -i /opt/docker/hosts /opt/docker/create-resume-generator-image.yml --limit localhost;
                 ```
 
 Save and run the job.

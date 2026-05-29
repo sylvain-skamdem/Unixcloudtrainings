@@ -15,7 +15,7 @@
 
    # copy war file on to container 
    COPY ./webapp.war /usr/local/tomcat/webapps
-1. Create `create-car-brand-choice-image.yml` unser *`/opt/docker`* on Ansible server 
+1. Create `create-resume-generator-image.yml` unser *`/opt/docker`* on Ansible server 
    ```sh
    ---
    - hosts: all
@@ -24,11 +24,11 @@
 
      tasks:
      - name: building docker image
-       command: "docker build -t car-brand-choice:v1.0.0 ." 
+       command: "docker build -t resume-generator:v1.0.0 ." 
        args:
          chdir: /opt/docker
    ```
-1. Create `create-car-brand-choice-image.yml` under *`/opt/docker`* on Ansible server
+1. Create `create-resume-generator-image.yml` under *`/opt/docker`* on Ansible server
    ```ssh
    ---
    - hosts: all
@@ -36,7 +36,7 @@
 
      tasks:
      - name: creating docker image using docker command
-       command: docker run -d --name car-brand-choice-container -p 8080:8080 car-brand-choice:v1.0.0
+       command: docker run -d --name resume-generator-container -p 8080:8080 resume-generator:v1.0.0
    ```
 
 ### Integration between Ansible-control-node and Jenkins
@@ -62,7 +62,7 @@ Enable connection between Ansible-control-node and Jenkins
      - Copy from: `Deploy_on_Container`
      
    - *Source Code Management:*
-      - Repository: `https://github.com/ngostal2019/Dev_code.git`
+      - Repository: `https://github.com/ngostal2019/Resume-template-generator.git`
       - Branches to build : `*/main`  
    - *Poll SCM* :      - `* * * *`
 
@@ -80,7 +80,7 @@ Enable connection between Ansible-control-node and Jenkins
 	       - Remote directory: `//opt//docker`
 	       - Exec command: 
                 ```sh 
-                ansible-playbook -i /etc/ansible/hosts /opt/ansible/create-car-brand-choice-image.yml;
+                ansible-playbook -i /etc/ansible/hosts /opt/ansible/create-resume-generator-image.yml;
                 ```
 
 Save and run the job now.

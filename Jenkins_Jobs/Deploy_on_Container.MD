@@ -17,14 +17,14 @@
 ### Integration between Docker-host and Jenkins
 
 Install "publish Over SSH"
- - `Manage Jenkins` > `Manage Plugins` > `Available` > `Publish over SSH`
+ - `Manage Jenkins ⚙️` > `Plugins` > `Available plugins` > `Publish over SSH`
 
 Enable connection between Docker-host and Jenkins
 
-- `Manage Jenkins` > `Configure System` > `Publish Over SSH` > `SSH Servers` 
+- `Manage Jenkins ⚙️` > `System` > `Publish Over SSH` > `SSH Servers` 
 
 	- SSH Servers:
-                - Name: `docker-host`
+    - Name: `docker-host`
 		- Hostname:`<ServerIP>`
 		- username: `dockeradmin`
                
@@ -37,7 +37,7 @@ Enable connection between Docker-host and Jenkins
      - Copy from: `Deploy_on_Docker_Host`
      
    - *Source Code Management:*
-      - Repository: `https://github.com/ngostal2019/Dev_code.git`
+      - Repository: `https://github.com/ngostal2019/Resume-template-generator.git`
       - Branches to build : `*/main`  
    - *Poll SCM* :      - `* * * *`
 
@@ -56,8 +56,8 @@ Enable connection between Docker-host and Jenkins
 	       - Exec command: 
                 ```sh 
                 cd /home/dockeradmin;
-                docker build -t car-brand-choice:v1.0.0 .; 
-                docker run -d --name simple-devops-container -p 8080:8080 car-brand-choice:v1.0.0;
+                docker build -t resume-generator:v1.0.0 .; 
+                docker run -d --name simple-devops-container -p 8080:8080 resume-generator:v1.0.0;
                 ```
 
 Save and run the job now.

@@ -3,15 +3,15 @@
   become: true
   tasks:
   - name: Stop if we have old docker container
-    command: docker stop car-brand-choice-container
+    command: docker stop resume-generator-container
     ignore_errors: yes
 
   - name: Remove stopped docker container
-    command: docker rm car-brand-choice-container
+    command: docker rm resume-generator-container
     ignore_errors: yes
 
   - name: Remove current docker image
-    command: docker rmi car-brand-choice:v1.0.0
+    command: docker rmi resume-generator:v1.0.0
     ignore_errors: yes
 #    register: result
 #    failed_when:
@@ -20,10 +20,10 @@
 
 
   - name: Building docker image
-    command: docker build -t car-brand-choice:v1.0.0 .
+    command: docker build -t resume-generator:v1.0.0 .
     args:
       chdir: /opt/docker
 
   - name: Creating docker image
-    command: docker run -d --name car-brand-choice-container -p 8080:8080 car-brand-choice:v1.0.0
+    command: docker run -d --name resume-generator-container -p 8080:8080 resume-generator:v1.0.0
 

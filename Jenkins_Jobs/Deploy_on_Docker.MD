@@ -9,18 +9,18 @@
 ### Integration between Docker-host and Jenkins
 
 Install "publish Over SSH"
- - `Manage Jenkins` > `Manage Plugins` > `Available` > `Publish over SSH`
+ - `Manage Jenkins ⚙️` > `Manage Plugins` > `Available` > `Publish over SSH`
 
 Enable connection between Docker-host and Jenkins
 
-- `Manage Jenkins` > `Configure System` > `Publish Over SSH` > `SSH Servers` 
+- `Manage Jenkins ⚙️` > `System` > `Publish Over SSH` > `SSH Servers` 
 
 	- SSH Servers:
-                - Name: `docker-host`
+    - Name: `docker-host`
 		- Hostname:`<ServerIP>`
 		- username: `dockeradmin`
                
-       -  `Advanced` > chose `Use password authentication, or use a different key`
+     -  `Advanced` > chose `Use password authentication, or use a different key`
 		 - password: `*******`
  
 ### Steps to create "Deploy_on_Docker_Host" Jenkin job
@@ -29,7 +29,7 @@ Enable connection between Docker-host and Jenkins
      - Copy from: `Deploy_on_Tomcat_Server`
      
    - *Source Code Management:*
-      - Repository: `https://github.com/ngostal2019/Dev_code.git`
+      - Repository: `https://github.com/ngostal2019/Resume-template-generator.git`
       - Branches to build : `*/main`  
    - *Poll SCM* :      - `* * * *`
 

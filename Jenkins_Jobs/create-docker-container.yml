@@ -5,14 +5,14 @@
 
   tasks:
   - name: Creating docker image using docker command
-    command: docker run -d --name car-brand-choice-container -p 8080:8080 car-brand-choice:v1.0.0
+    command: docker run -d --name resume-generator-container -p 8080:8080 resume-generator:v1.0.0
 	
 # option-2 : Creating docker container using docker_container module 	
 #  tasks:
-#  - name: Create car-brand-choice-container
+#  - name: Create resume-generator-container
 #    docker_container:
-#      name: car-brand-choice-container
-#      image: car-brand-choice
+#      name: resume-generator-container
+#      image: resume-generator
 #      state: present
 #      recreate: yes
 #      ports:

@@ -31,7 +31,7 @@ Enable connection between  Docker and Jenkins
      - Description: `Deploy war file to Docker server and trigger downstream job invoke_ansible_commands_CD`
      
    - *Source Code Management:*
-      - Repository: `https://github.com/ngostal2019/Dev_code.git`
+      - Repository: `https://github.com/ngostal2019/Resume-template-generator.git`
       - Branches to build : `*/main`  
    - Check *GitHub hook trigger for GITScm polling*
 

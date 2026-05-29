@@ -19,7 +19,7 @@
     ```
 1. Now run the playbook
    ```sh
-   ansible-playbook -i hosts create-car-brand-choice-image.yml
+   ansible-playbook -i hosts create-resume-generator-image.yml
    ```
 #### NOTE: Due to the difficulty Jenkins has to retreive the vault password during the pipeline execution, I have deleted that instruction from the current file
 

@@ -11,15 +11,15 @@
 
   tasks:
   - name: Stop if we have old docker containers running
-    command: docker stop car-brand-choice-container
+    command: docker stop resume-generator-container
     ignore_errors: yes # To ignore errors if the container does not run/exist
 
   - name: Remove stopped docker container
-    command: docker rm car-brand-choice-container
+    command: docker rm resume-generator-container
     ignore_errors: yes # To ignore errors if the container does not exist
 
   - name: Remove current docker image
-    command: docker rmi "car-brand-choice:v{{ major_v }}.{{ minor_v }}.{{ build_num }}"
+    command: docker rmi "resume-generator:v{{ major_v }}.{{ minor_v }}.{{ build_num }}"
     ignore_errors: yes # To ignore errors if the image does not exist
 #    register: result
 #    failed_when:
@@ -27,12 +27,12 @@
 #      - '"docker" not in result.stdout'
 
   - name: Building docker image
-    command: docker build -t car-brand-choice .
+    command: docker build -t resume-generator .
     args:
       chdir: /opt/docker # This is where we chose our Dockerfile to reside in.
 
   - name: Create tag to image
-    command: docker tag car-brand-choice "ngostal/car-brand-choice:v{{ major_v }}.{{ minor_v }}.{{ build_num }}"
+    command: docker tag resume-generator "ngostal/resume-generator:v{{ major_v }}.{{ minor_v }}.{{ build_num }}"
 
   - name: Login to your DockerHub account
     command: docker login -u "{{ docker_username }}" -p "{{ docker_passwd }}"
@@ -41,10 +41,10 @@
 #   docker_passwd: your_dockerhub_password
 
   - name: Push image onto DockerHub
-    command: docker push "ngostal/car-brand-choice:v{{ major_v }}.{{ minor_v }}.{{ build_num }}"
+    command: docker push "ngostal/resume-generator:v{{ major_v }}.{{ minor_v }}.{{ build_num }}"
 
   - name: Remove docker images from docker server
-    command: docker rmi car-brand-choice "ngostal/car-brand-choice:v{{ major_v }}.{{ minor_v }}.{{ build_num }}"
+    command: docker rmi resume-generator "ngostal/resume-generator:v{{ major_v }}.{{ minor_v }}.{{ build_num }}"
     ignore_errors: yes
 
   - name: Log out from your DockerHub Account
