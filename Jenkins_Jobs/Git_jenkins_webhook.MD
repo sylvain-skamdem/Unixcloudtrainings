@@ -20,7 +20,7 @@
        - Write the Payload URL as `http://jenkins-ip:8080/github-webhook/` that was copied from Jenkins
        - Content type is `application/json`
        - Which events would you like to trigger this webhook?
-         - *Just the push event*: Only send data when someone pushed into my repository.
+         - *Just the push event*: Only send data when someone pushed into my repository. :white_check_mark:
          - *Send me everything*: If there is any pull or push event in our repository we will get notified.
          - *Let me select individual events*: We can configure for what events we want our data.
        - Make sure that `Active` is checked
